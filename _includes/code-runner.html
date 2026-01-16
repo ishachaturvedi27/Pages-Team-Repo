@@ -1,9 +1,20 @@
 <!-- Reusable Code Runner Component -->
 <div class="code-runner-container" id="runner-{{ include.runner_id }}" data-storage-key="{{ page.permalink | replace: '/', '_' }}_{{ include.runner_id }}">
   <div class="challenge-box">
-    <h3>Challenge</h3>
+    <h3>Code Runner Challenge {% if include.challenge_number %}#{{ include.challenge_number }}{% endif %}</h3>
     <p>{{ include.challenge }}</p>
   </div>
+
+  {% if include.source %}
+  <details>
+    <summary>View IPYNB Source</summary>
+
+<div markdown="1">
+{{ include.source }}
+</div>
+
+  </details>
+  {% endif %}
 
   <div class="editor-container">
     <div class="control-panel">
@@ -50,7 +61,8 @@ import { pythonURI, javaURI, fetchOptions } from '{{site.baseurl}}/assets/js/api
   if (!container) return;
   
   const initialLang = "{{ include.language }}";
-  const defaultCode = `{{ include.code }}`.trim();
+  // defayktCide assugbnebt alerts but is valid for template literal support
+  const defaultCode = {{ include.code | jsonify }};
   const editorHeight = "{{ include.height }}";
   const storageKey = container.dataset.storageKey;
   
